@@ -18,11 +18,12 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor //used for builder
 @Entity
-@Table(name = "user_entity")
+@Table(name = "t_user")
 public class User implements UserDetails {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @Column(updatable = false, nullable = false)
     private Long id;
     private String firstName;
     private String lastName;
@@ -36,7 +37,7 @@ public class User implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of(new SimpleGrantedAuthority(role.name()));
+        return role.getAuthorities();
     }
 
     @Override

@@ -7,18 +7,22 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.io.Serializable;
+
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-public class Token {
+@Table(name = "t_token")
+public class Token implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @Column(updatable = false, nullable = false)
     private Long id;
 
-    @Column(unique = true)
+    @Column(unique = true, length = 512)
     private String accessToken;
 
     @Enumerated(EnumType.STRING)
@@ -28,7 +32,7 @@ public class Token {
 
     private boolean expired;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
 

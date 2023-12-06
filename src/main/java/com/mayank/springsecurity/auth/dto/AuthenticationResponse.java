@@ -1,4 +1,4 @@
-package com.mayank.springsecurity.auth;
+package com.mayank.springsecurity.auth.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;

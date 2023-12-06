@@ -1,5 +1,6 @@
 package com.mayank.springsecurity.config;
 
+import com.mayank.springsecurity.token.Token;
 import com.mayank.springsecurity.token.TokenRepository;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -20,7 +21,7 @@ public class LogoutService implements LogoutHandler {
         final String jwt;
         if (authHeader == null || !authHeader.startsWith("Bearer")) return;
         jwt = authHeader.substring(7);
-        var storedToken = tokenRepository.findByAccessToken(jwt)
+        Token storedToken = tokenRepository.findByAccessToken(jwt)
                 .orElse(null);
         if(storedToken != null) {
             storedToken.setExpired(true);

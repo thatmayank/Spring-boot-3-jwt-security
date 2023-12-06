@@ -1,5 +1,6 @@
-package com.mayank.springsecurity.auth;
+package com.mayank.springsecurity.auth.dto;
 
+import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -10,6 +11,10 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class AuthenticationRequest {
+
+    @NotBlank(message = "Email cannot be empty")
     private String email;
+
+    @NotBlank(message = "Password cannot be blank")
     private String password;
 }
